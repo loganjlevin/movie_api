@@ -4,16 +4,163 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/styles.css" />
     <title>Documentation</title>
   </head>
   <body>
-    <h1>myFlix Application</h1>
-    <p>
-      This is the server-side component of a 'movies' web application that will
-      provide users with access to information about different movies,
-      directors, and genres. Users will be able to sign up, update their
-      personal information, and create a list of their favorite movies. It will
-      be created using Node.js, Express and PostgreSQL.
-    </p>
+    <header>
+      <h1>myFlix Application</h1>
+      <p>
+        This is the server-side component of a 'movies' web application that
+        will provide users with access to information about different movies,
+        directors, and genres. Users will be able to sign up, update their
+        personal information, and create a list of their favorite movies. It
+        will be created using Node.js, Express and PostgreSQL.
+      </p>
+    </header>
+
+    <table>
+      <tr>
+        <th>Business Logic</th>
+        <th>URL</th>
+        <th>HTTP Method</th>
+        <th>Request body data format</th>
+        <th>Response body data format</th>
+      </tr>
+      <tr>
+        <td>Get a list of ALL movies</td>
+        <td>/movies</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data about all the movies</td>
+      </tr>
+      <tr>
+        <td>Get data about a single movie by title</td>
+        <td>/movies/[Title]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>
+          A JSON object holding data about a single movie, containing
+          description, genre, director, image URL, whether it's featured.
+          <br />
+          <div class="json">
+            {<br />
+            &nbsp&nbsptitle:&nbsp"Citizen Kane", <br />
+            &nbsp&nbspdescription:&nbsp"Following the death of a publishing
+            tycoon, news reporters scramble to discover the meaning of his final
+            utterance."<br />
+            &nbsp&nbspgenre:&nbsp"Drama" <br />
+            &nbsp&nbspdirector:&nbsp"Orson Welles"<br />
+            &nbsp&nbspimageURL:&nbsp"https://wikimedia.org/Citizen_Kane_poster.jpg"
+            <br />
+            &nbsp&nbspfeatured:&nbsp"true" <br />
+            } <br />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>GET data about a genre by name</td>
+        <td>/genres/[Title]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>
+          A JSON object holding data about a genre containing a description
+          <div class="json">
+            {<br />
+            &nbsp&nbsptitle:&nbsp"Drama", <br />
+            &nbsp&nbspdescription:&nbsp"Dramas are serious presentations or
+            stories with settings or life situations that portray realistic
+            characters in conflict with either themselves, others, or forces of
+            nature."<br />
+            } <br />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Get data about a director</td>
+        <td>/directors/[Name]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>
+          A JSON object holding data about a director containing bio, birth
+          year, death year
+          <div class="json">
+            {<br />
+            &nbsp&nbspname:&nbsp"Orson Welles", <br />
+            &nbsp&nbspbio:&nbsp"George Orson Welles was an American director,
+            actor, producer, and screenwriter who is remembered for his
+            innovative work in film, radio, and theatre. He is considered to be
+            among the greatest and most influential filmmakers of all time."<br />
+            &nbsp&nbspbirthYear:&nbsp"1915", <br />
+            &nbsp&nbspdeathYear:&nbsp"1985", <br />
+            } <br />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Register a new user</td>
+        <td>/users</td>
+        <td>POST</td>
+        <td>
+          A JSON object holding data about the user to register
+          <div class="json">
+            {<br />
+            &nbsp&nbspusername:&nbsp"moviegoer1985", <br />
+            &nbsp&nbsppassword:&nbsp"password123"<br />
+            } <br />
+          </div>
+        </td>
+        <td>
+          A JSON object holding data about the user that was registered,
+          including an ID.
+          <div class="json">
+            {<br />
+            &nbsp&nbspid:&nbsp5, <br />
+            &nbsp&nbspusername:&nbsp"moviegoer1985", <br />
+            &nbsp&nbsppassword:&nbsp"password123"<br />
+            } <br />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Update a user's username by id</td>
+        <td>/users/[ID]/[Username]</td>
+        <td>PUT</td>
+        <td>None</td>
+        <td>
+          A text message indicating whether the username was successfully
+          updated.
+        </td>
+      </tr>
+      <tr>
+        <td>Add a movie to a user's list of favorites</td>
+        <td>/users/[ID]/favorites/[Title]</td>
+        <td>PUT</td>
+        <td>None</td>
+        <td>
+          A text message indicating whether the movie was successfully added to
+          favorites.
+        </td>
+      </tr>
+      <tr>
+        <td>Remove a movie from a user's list of favorites</td>
+        <td>/users/[ID]/favorites/[Title]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>
+          A text message indicating whether the movie was successfully removed
+          from favorites.
+        </td>
+      </tr>
+      <tr>
+        <td>Deregister an existing user</td>
+        <td>/users/[ID]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>
+          A text message indicating whether the user was successfully removed.
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
