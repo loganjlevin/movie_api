@@ -1,7 +1,6 @@
 // import express and morgan packages
 const express = require('express'),
   morgan = require('morgan'),
-  uuid = require('uuid'),
   mongoose = require('mongoose'),
   Models = require('./models.js');
 
