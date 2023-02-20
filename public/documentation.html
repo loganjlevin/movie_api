@@ -10,13 +10,13 @@
   <body>
     <header>
       <h1>myFlix Application</h1>
-      <p>
+      <div>
         This is the server-side component of a 'movies' web application that
         will provide users with access to information about different movies,
         directors, and genres. Users will be able to sign up, update their
         personal information, and create a list of their favorite movies. It
         will be created using Node.js, Express and PostgreSQL.
-      </p>
+      </div>
     </header>
 
     <table>
@@ -42,37 +42,62 @@
         <td>
           A JSON object holding data about a single movie, containing
           description, genre, director, image URL, whether it's featured.
-          <br />
+
           <div class="json">
-            {<br />
-            &nbsp&nbsptitle:&nbsp"Citizen Kane", <br />
-            &nbsp&nbspdescription:&nbsp"Following the death of a publishing
-            tycoon, news reporters scramble to discover the meaning of his final
-            utterance."<br />
-            &nbsp&nbspgenre:&nbsp"Drama" <br />
-            &nbsp&nbspdirector:&nbsp"Orson Welles"<br />
-            &nbsp&nbspimageURL:&nbsp"https://wikimedia.org/Citizen_Kane_poster.jpg"
-            <br />
-            &nbsp&nbspfeatured:&nbsp"true" <br />
-            } <br />
+            {
+            <div>_id: 1,</div>
+            <div>Title:"Citizen Kane",</div>
+            <div>
+              Description:"Following the death of a publishing tycoon, news
+              reporters scramble to discover the meaning of his final
+              utterance."
+            </div>
+            <div>
+              Genre: {
+              <div>Name: "Drama"</div>
+              <div>
+                Description: "Dramas are serious presentations or stories with
+                settings or life situations that portray realistic characters in
+                conflict with either themselves, others, or forces of nature."
+              </div>
+              }
+            </div>
+            <div>
+              Director: {
+              <div>Name: "Orson Welles"</div>
+              <div>
+                Description: "George Orson Welles was an American director,
+                actor, producer, and screenwriter who is remembered for his
+                innovative work in film, radio, and theatre. He is considered to
+                be among the greatest and most influential filmmakers of all
+                time."
+              </div>
+              <div>Birthyear: "1915"</div>
+              <div>Deathyear: "1985"</div>
+              }
+            </div>
+            <div>imageURL:"https://wikimedia.org/Citizen_Kane_poster.jpg"</div>
+            <div>featured:"true"</div>
+            }
           </div>
         </td>
       </tr>
       <tr>
         <td>GET data about a genre by name</td>
-        <td>/genres/[Title]</td>
+        <td>/genres/[Name]</td>
         <td>GET</td>
         <td>None</td>
         <td>
           A JSON object holding data about a genre containing a description
           <div class="json">
-            {<br />
-            &nbsp&nbsptitle:&nbsp"Drama", <br />
-            &nbsp&nbspdescription:&nbsp"Dramas are serious presentations or
-            stories with settings or life situations that portray realistic
-            characters in conflict with either themselves, others, or forces of
-            nature."<br />
-            } <br />
+            {
+            <div>Name: "Drama"</div>
+            <div>
+              Description: "Dramas are serious presentations or stories with
+              settings or life situations that portray realistic characters in
+              conflict with either themselves, others, or forces of nature."
+            </div>
+            }
           </div>
         </td>
       </tr>
@@ -85,15 +110,17 @@
           A JSON object holding data about a director containing bio, birth
           year, death year
           <div class="json">
-            {<br />
-            &nbsp&nbspname:&nbsp"Orson Welles", <br />
-            &nbsp&nbspbio:&nbsp"George Orson Welles was an American director,
-            actor, producer, and screenwriter who is remembered for his
-            innovative work in film, radio, and theatre. He is considered to be
-            among the greatest and most influential filmmakers of all time."<br />
-            &nbsp&nbspbirthYear:&nbsp"1915", <br />
-            &nbsp&nbspdeathYear:&nbsp"1985", <br />
-            } <br />
+            {
+            <div>Name: "Orson Welles"</div>
+            <div>
+              Description: "George Orson Welles was an American director, actor,
+              producer, and screenwriter who is remembered for his innovative
+              work in film, radio, and theatre. He is considered to be among the
+              greatest and most influential filmmakers of all time."
+            </div>
+            <div>Birthyear: "1915"</div>
+            <div>Deathyear: "1985"</div>
+            }
           </div>
         </td>
       </tr>
@@ -104,57 +131,100 @@
         <td>
           A JSON object holding data about the user to register
           <div class="json">
-            {<br />
-            &nbsp&nbspusername:&nbsp"moviegoer1985", <br />
-            &nbsp&nbsppassword:&nbsp"password123"<br />
-            } <br />
+            {
+            <div>Username: "moviegoer1985"</div>
+            <div>Password: "password123"</div>
+            <div>Email: "moviegoer1985@gmail.com"</div>
+            <div>Birthday: "1985-09-12"</div>
+            }
           </div>
         </td>
         <td>
           A JSON object holding data about the user that was registered,
           including an ID.
           <div class="json">
-            {<br />
-            &nbsp&nbspid:&nbsp5, <br />
-            &nbsp&nbspusername:&nbsp"moviegoer1985", <br />
-            &nbsp&nbsppassword:&nbsp"password123"<br />
-            } <br />
+            {
+            <div>_id: 1</div>
+            <div>Username: "moviegoer1985"</div>
+            <div>Password: "password123"</div>
+            <div>Email: "moviegoer1985@gmail.com"</div>
+            <div>Birthday: "1985-09-12"</div>
+            <div>FavoriteMovies: []</div>
+            }
           </div>
         </td>
       </tr>
       <tr>
-        <td>Update a user's username by id</td>
-        <td>/users/[ID]/[Username]</td>
+        <td>Update a user's info by username</td>
+        <td>/users/[Username]</td>
         <td>PUT</td>
-        <td>None</td>
         <td>
-          A text message indicating whether the username was successfully
-          updated.
+          A JSON object holding the new user data
+          <div class="json">
+            {
+            <div>Username: "moviegoer1985"</div>
+            <div>Password: "password123"</div>
+            <div>Email: "moviegoer1985@gmail.com"</div>
+            <div>Birthday: "1985-09-12"</div>
+            <div>FavoriteMovies: [1, 2]</div>
+            }
+          </div>
+        </td>
+        <td>
+          A JSON object holding the updated user data
+          <div class="json">
+            {
+            <div>_id: 1</div>
+            <div>Username: "moviegoer1985"</div>
+            <div>Password: "password123"</div>
+            <div>Email: "moviegoer1985@gmail.com"</div>
+            <div>Birthday: "1985-09-12"</div>
+            <div>FavoriteMovies: [1, 2]</div>
+            }
+          </div>
         </td>
       </tr>
       <tr>
         <td>Add a movie to a user's list of favorites</td>
-        <td>/users/[ID]/favorites/[Title]</td>
+        <td>/users/[Username]/movies/[MovieID]</td>
         <td>PUT</td>
         <td>None</td>
         <td>
-          A text message indicating whether the movie was successfully added to
-          favorites.
+          A JSON object holding the updated user data
+          <div class="json">
+            {
+            <div>_id: 1</div>
+            <div>Username: "moviegoer1985"</div>
+            <div>Password: "password123"</div>
+            <div>Email: "moviegoer1985@gmail.com"</div>
+            <div>Birthday: "1985-09-12"</div>
+            <div>FavoriteMovies: [1, 2, 3]</div>
+            }
+          </div>
         </td>
       </tr>
       <tr>
         <td>Remove a movie from a user's list of favorites</td>
-        <td>/users/[ID]/favorites/[Title]</td>
+        <td>/users/[Username]/movies/[MovieID]</td>
         <td>DELETE</td>
         <td>None</td>
         <td>
-          A text message indicating whether the movie was successfully removed
-          from favorites.
+          A JSON object holding the updated user data
+          <div class="json">
+            {
+            <div>_id: 1</div>
+            <div>Username: "moviegoer1985"</div>
+            <div>Password: "password123"</div>
+            <div>Email: "moviegoer1985@gmail.com"</div>
+            <div>Birthday: "1985-09-12"</div>
+            <div>FavoriteMovies: [1, 2]</div>
+            }
+          </div>
         </td>
       </tr>
       <tr>
         <td>Deregister an existing user</td>
-        <td>/users/[ID]</td>
+        <td>/users/[Username]</td>
         <td>DELETE</td>
         <td>None</td>
         <td>
