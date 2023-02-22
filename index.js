@@ -27,7 +27,7 @@ const app = express();
 const cors = require('cors');
 let auth = require('./auth.js')(app);
 const passport = require('passport');
-require('./passport');
+require('./passport.js');
 
 // use cors Cross-Origin Resource Sharing
 let allowedOrigins = ['*'];
@@ -212,12 +212,18 @@ app.put(
     check('Email', 'Email does not appear to be valid').isEmail(),
   ],
   (req, res) => {
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
         $set: {
           Username: req.body.Username,
-          Password: req.body.Password,
+          Password: hashedPassword,
           Email: req.body.Email,
           Birthday: req.body.Birthday,
         },
@@ -309,5 +315,5 @@ app.use((err, req, res, next) => {
 
 // listen on port 8080 and log the port
 app.listen(port, '0.0.0.0', () => {
-  console.log('Your app is listening on port 8080.');
+  console.log(`Your app is listening on port ${port}.`);
 });
