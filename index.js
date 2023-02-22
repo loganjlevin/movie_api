@@ -10,14 +10,9 @@ const express = require('express'),
 const Movies = Models.Movie;
 const Users = Models.User;
 
-// connect mongoose to mongoDB on local host
-// mongoose.connect('mongodb://127.0.0.1:27017/myFLixDB', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
-
-// connect mongoose to mongoDB Atlas
-mongoose.connect(process.env.CONNECTION_URI, {
+// connect mongoose to mongoDB Atlas or local host
+const { CONNECTION_URI } = require('./config');
+mongoose.connect(CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -25,7 +20,12 @@ mongoose.connect(process.env.CONNECTION_URI, {
 // assign express to app object
 const app = express();
 const cors = require('cors');
+
+// use body parser package
+app.use(express.json());
+
 let auth = require('./auth.js')(app);
+
 const passport = require('passport');
 require('./passport.js');
 
@@ -49,9 +49,6 @@ app.use(
 
 // use morgan logging package
 app.use(morgan('common'));
-
-// use body parser package
-app.use(express.json());
 
 // send static files from public folder when requested
 app.use(express.static('public'));
@@ -218,6 +215,7 @@ app.put(
       return res.status(422).json({ errors: errors.array() });
     }
     let hashedPassword = Users.hashPassword(req.body.Password);
+
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
