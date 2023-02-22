@@ -30,7 +30,7 @@ const passport = require('passport');
 require('./passport');
 
 // use cors Cross-Origin Resource Sharing
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+let allowedOrigins = ['*'];
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -201,6 +201,7 @@ app.get(
 // Update a user's info
 app.put(
   '/users/:Username',
+  passport.authenticate('jwt', { session: false }),
   [
     check('Username', 'Username is required').isLength({ min: 5 }),
     check(
@@ -210,7 +211,6 @@ app.put(
     check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail(),
   ],
-  passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Users.findOneAndUpdate(
       { Username: req.params.Username },
