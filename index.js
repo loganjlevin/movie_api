@@ -11,7 +11,13 @@ const Movies = Models.Movie;
 const Users = Models.User;
 
 // connect mongoose to mongoDB on local host
-mongoose.connect('mongodb://127.0.0.1:27017/myFLixDB', {
+// mongoose.connect('mongodb://127.0.0.1:27017/myFLixDB', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+
+// connect mongoose to mongoDB Atlas
+mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
