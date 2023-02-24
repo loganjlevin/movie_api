@@ -35,6 +35,9 @@ app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
+      if (allowedOrigins[0] === '*') {
+        return callback(null, true);
+      }
       if (allowedOrigins.indexOf(origin) === -1) {
         // If a specific origin isn't found on the list of allowed origins
         let message =
