@@ -24,17 +24,8 @@ const cors = require('cors');
 // use body parser package
 app.use(express.json());
 
-let auth = require('./auth.js')(app);
-
-const passport = require('passport');
-require('./passport.js');
-
 // use cors Cross-Origin Resource Sharing
-app.use(
-  cors({
-    origin: '*',
-  })
-);
+app.use(cors());
 //let allowedOrigins = ['*', 'http://localhost:1234'];
 // app.use(
 //   cors({
@@ -54,6 +45,11 @@ app.use(
 //     },
 //   })
 // );
+
+let auth = require('./auth.js')(app);
+
+const passport = require('passport');
+require('./passport.js');
 
 // use morgan logging package
 app.use(morgan('common'));
