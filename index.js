@@ -30,7 +30,7 @@ const passport = require('passport');
 require('./passport.js');
 
 // use cors Cross-Origin Resource Sharing
-let allowedOrigins = ['*'];
+let allowedOrigins = ['*', 'localhost:1234'];
 app.use(
   cors({
     origin: (origin, callback) => {
