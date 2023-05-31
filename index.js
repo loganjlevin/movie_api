@@ -58,6 +58,14 @@ app.use(morgan('common'));
 app.use(express.static('public'));
 
 // get a list of all movies
+/**
+ * @method GET to endpoint '/movies'
+ * @name getMovies
+ * @kind function
+ * @requires passport module for authentication
+ * @requires movies mongoose.Model
+ * @returns a JSON object holding data about all the movies
+ */
 app.get(
   '/movies',
   passport.authenticate('jwt', { session: false }),
@@ -74,6 +82,14 @@ app.get(
 );
 
 // get data about a movie by title
+/**
+ * @method GET to endpoint '/movies/:Title'
+ * @name getMovie
+ * @kind function
+ * @requires passport module for authentication
+ * @requires movies mongoose.Model
+ * @returns Returns a JSON object holding data about a single movie by title
+ */
 app.get(
   '/movies/:Title',
   passport.authenticate('jwt', { session: false }),
@@ -90,6 +106,14 @@ app.get(
 );
 
 // get data about a genre by name
+/**
+ * @method GET to endpoint '/genres/:Name'
+ * @name getGenre
+ * @kind function
+ * @requires passport module for authentication
+ * @requires movies mongoose.Model
+ * @returns a JSON object holding data about genre by name
+ */
 app.get(
   '/genres/:Name',
   passport.authenticate('jwt', { session: false }),
@@ -106,6 +130,14 @@ app.get(
 );
 
 // get data about a director by name
+/**
+ * @method GET to endpoint '/directors/:Name'
+ * @name getDirector
+ * @kind function
+ * @requires passport module for authentication
+ * @requires movies mongoose.Model
+ * @returns a JSON object holding data about director by name
+ */
 app.get(
   '/directors/:Name',
   passport.authenticate('jwt', { session: false }),
@@ -122,6 +154,18 @@ app.get(
 );
 
 // post a new user's data
+/**
+ * This function allows new users to Register:
+ * validates request JSON object (includes all required fields)
+ * checks DB, if the user that is going to be created already exists
+ * if no errors appeared, creates new user object in DB
+ * @method POST to endpoint '/users'
+ * @name addUser
+ * @kind function
+ * @requires passport module for authentication
+ * @requires Users mongoose.Model
+ * @returns a JSON object holding data of newly created user
+ */
 app.post(
   '/users',
   [
@@ -168,6 +212,15 @@ app.post(
 );
 
 // Get all users
+/**
+ * This function allows request to get full list of users
+ * @method GET to endpoint '/users'
+ * @name getUsers
+ * @kind function
+ * @requires passport module for authentication
+ * @requires Users mongoose.Model
+ * @returns a JSON object holding data about all the USERS
+ */
 app.get(
   '/users',
   passport.authenticate('jwt', { session: false }),
@@ -184,6 +237,15 @@ app.get(
 );
 
 // Get a user by id
+/**
+ * This function allows request to get info about one specific user by id
+ * @method GET to endpoint '/users/:id'
+ * @name getUser
+ * @kind function
+ * @requires passport module for authentication
+ * @requires Users mongoose.Model
+ * @returns a JSON object of a single user by id
+ */
 app.get(
   '/users/:id',
   passport.authenticate('jwt', { session: false }),
@@ -200,6 +262,18 @@ app.get(
 );
 
 // Update a user's info
+/**
+ * This function allows request to update info for specific user by id
+ * validates request JSON object (includes all required fields)
+ * checks DB, if the user that is going to be updated exists
+ * if no errors appeared, updates user object in DB
+ * @method PUT to endpoint '/users/:id''
+ * @name updateUser
+ * @kind function
+ * @requires passport module for authentication
+ * @requires Users mongoose.Model
+ * @returns a JSON object with updated information
+ */
 app.put(
   '/users/:id',
   passport.authenticate('jwt', { session: false }),
@@ -244,6 +318,15 @@ app.put(
 );
 
 // Add a movie to a user's list of favorites
+/**
+ * This function adds a specific movie to the list of favorites for specific user
+ * @method POST to endpoint '/users/:id/movies/:MovieID'
+ * @name addFavorite
+ * @kind function
+ * @requires passport module for authentication
+ * @requires Users mongoose.Model
+ * @returns a JSON object with updated user information
+ */
 app.post(
   '/users/:id/movies/:MovieID',
   passport.authenticate('jwt', { session: false }),
@@ -267,6 +350,15 @@ app.post(
 );
 
 // Remove a movie from a user's list of favorites
+/**
+ * This function deletes a specific movie from the list of favorites for specific user
+ * @method DELETE to endpoint '/users/id/movies/:MovieID'
+ * @name deleteFavorite
+ * @kind function
+ * @requires passport module for authentication
+ * @requires Users mongoose.Model
+ * @returns a JSON object with updated user information
+ */
 app.delete(
   '/users/:id/movies/:MovieID',
   passport.authenticate('jwt', { session: false }),
@@ -290,6 +382,15 @@ app.delete(
 );
 
 // Deregister an existing user
+/**
+ * This function allows the user to delete account from DB
+ * @method DELETE to endpoint '/users/:id'
+ * @name deleteUser
+ * @kind function
+ * @requires passport module for authentication
+ * @requires Users mongoose.Model
+ * @returns message that :Username was deleted
+ */
 app.delete(
   '/users/:id',
   passport.authenticate('jwt', { session: false }),
