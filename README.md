@@ -23,6 +23,10 @@ This is the backend for the full stack 'MyFlix' web application (written with [R
 
 ## Technologies
 
+![Nodejs Logo](https://cdn.iconscout.com/icon/free/png-256/free-nodejs-2-226035.png)
+![MongoDB Logo](https://cdn.iconscout.com/icon/free/png-256/free-mongodb-3-1175138.png)
+
 - Node.js
 - Express
 - Mongoose
+- MongoDB
